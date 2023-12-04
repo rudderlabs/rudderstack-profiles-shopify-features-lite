@@ -1,0 +1,3 @@
+output/*
+logs/logfile.log
+.DS_Store

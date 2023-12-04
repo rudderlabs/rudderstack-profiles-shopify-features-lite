@@ -1,0 +1,78 @@
+inputs:
+  - name: rsIdentifies
+    source_metadata:
+      role: shopify
+      category: webhook
+    contract:
+      is_optional: false
+      is_event_stream: true
+      with_entity_ids:
+        - user
+      with_columns:
+        - name: "timestamp"
+        - name: user_id
+        - name: anonymous_id
+        - name: email
+    app_defaults:
+      # table: RUDDERSTACK_TEST_DB.DATA_APPS_SIMULATED_SHOPIFY.IDENTIFIES
+      table: RUDDERSTACK_TEST_DB.DATA_APPS_SIMULATED_SHOPIFY.identifies
+      occurred_at_col: "timestamp"
+      ids:
+        - select: "user_id"
+          type: user_id
+          entity: user
+        - select: "anonymous_id"
+          type: anonymous_id
+          entity: user
+        - select: "lower(email)"
+          type: email
+          entity: user
+  - name: rsTracks
+    source_metadata:
+      role: shopify
+      category: webhook
+    contract:
+      is_optional: false
+      is_event_stream: true
+      with_entity_ids:
+        - user
+      with_columns:
+        - name: "timestamp"
+        - name: user_id
+        - name: anonymous_id
+    app_defaults:
+      # table: RUDDERSTACK_TEST_DB.DATA_APPS_SIMULATED_SHOPIFY.TRACKS
+      table: RUDDERSTACK_TEST_DB.DATA_APPS_SIMULATED_SHOPIFY.tracks
+      occurred_at_col: "timestamp"
+      ids:
+        - select: "user_id"
+          type: user_id
+          entity: user
+        - select: "anonymous_id"
+          type: anonymous_id
+          entity: user
+  - name: rsPages
+    source_metadata:
+      role: shopify
+      category: webhook
+    contract:
+      is_optional: false
+      is_event_stream: true
+      with_entity_ids:
+        - user
+      with_columns:
+        - name: "timestamp"
+        - name: user_id
+        - name: anonymous_id
+        - name: context_session_id
+    app_defaults:
+      # table: RUDDERSTACK_TEST_DB.DATA_APPS_SIMULATED_SHOPIFY.PAGES
+      table: RUDDERSTACK_TEST_DB.DATA_APPS_SIMULATED_SHOPIFY.pages
+      occurred_at_col: "timestamp"
+      ids:
+        - select: "user_id"
+          type: user_id
+          entity: user
+        - select: "anonymous_id"
+          type: anonymous_id
+          entity: user
