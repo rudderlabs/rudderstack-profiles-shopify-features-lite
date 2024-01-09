@@ -18,6 +18,24 @@ models:
         - days_since_last_seen
         - is_churned_7_days
         - days_since_account_creation
+  - name: churn_model_dev
+    model_type: python_model
+    model_spec:
+      occurred_at_col: insert_ts
+      entity_key: user
+      validity_time: 24h
+      py_repo_url: git@github.com:rudderlabs/rudderstack-profiles-classifier.git
+      train:
+        file_extension: .json
+        file_validity: 60m
+        inputs:
+          - models/shopify_user_features
+        config:
+          data:
+            features_profiles_model: shopify_user_features
+            inputs:
+              - models/shopify_user_features
+
 var_groups:
   - name: user_vars
     entity_key: user
